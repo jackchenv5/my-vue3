@@ -60,7 +60,7 @@ import { MenuProps } from 'ant-design-vue';
 import type { MenuTheme } from 'ant-design-vue';
 const theme = ref<MenuTheme>('dark');
 
-const current = ref<string[]>(['home']);
+const current = ref<string[]>(['time']);
 const items = ref<MenuProps['items']>([
   {
     key: 'home',
@@ -134,41 +134,32 @@ const items = ref<MenuProps['items']>([
 // Table start
 import { SmileOutlined, DownOutlined } from '@ant-design/icons-vue';
 const columns = [
-  {
+{
     name: '项目名',
     title: '项目名',
     dataIndex: 'name',
-    key: 'name',
+    key: '1',
+  },  
+{
+    name: '计划完成时间',
+    title: '计划完成时间',
+    dataIndex: 'schedule_time',
+    key: 'schedule_time',
   },
   {
-    title: '时间（进度绩效指数SPI）',
-    dataIndex: 'age',
-    key: 'age',
+    title: '实际完成时间',
+    dataIndex: 'actual_time',
+    key: 'actual_time',
   },
   {
-    title: '预算（成本执行指数CPI）',
-    dataIndex: 'address',
-    key: 'address',
+    title: '进度绩效指数（已经完成的工作的价值/计划完成的工作价值）',
+    key: 'spi',
+    dataIndex: 'spi',
   },
   {
-    title: '代码质量',
-    key: 'tags',
-    dataIndex: 'tags',
-  },
-  {
-    title: '投资回报率(ROI = (净利润 / 投资成本) × 100%)',
-    key: 'roi',
-    dataIndex: 'roi',
-  },
-  {
-    title: '项目生产率(实际产出 / 计划产出)',
-    key: 'produce',
-    dataIndex: 'produce',
-  },
-  {
-    title: '客户满意度（(非常满意/客户总数)）',
-    key: 'manyi',
-    dataIndex: 'manyi',
+    title: '关键路径时间',
+    key: 'cpm',
+    dataIndex: 'cpm',
   },
 ];
 
@@ -176,32 +167,50 @@ const data = [
   {
     key: '1',
     name: '项目1',
-    age: 1,
-    address: 2,
-    tags: ['缺陷率（0.5%）', '修复率(98%)'],
-    roi: '20%',
-    produce:'20%',
-    manyi:'80%'
+    schedule_time: '2024-08-01~2024-10-01',
+    actual_time:'2024-08-01~2024-10-10',
+    spi: '2',
+    cpm:'立项（10天）->编码（30天）->测试（10天） 50天'
   },
   {
-    key: '2',
+    key: '1',
     name: '项目2',
-    age: 0.9,
-    address: 1.5,
-    tags: ['缺陷率（0.2%）', '修复率(95%)'],
-    roi: '30%',
-    produce:'20%',
-    manyi:'80%'
+    schedule_time: '2024-08-01~2024-10-01',
+    actual_time:'2024-08-01~2024-10-10',
+    spi: '1.2',
+    cpm:'立项（3天）->编码（20天）->测试（10天） 33天'
   },
   {
-    key: '3',
+    key: '1',
     name: '项目3',
-    age: 0.8,
-    address: 1.0,
-    tags: ['缺陷率（0.7%）', '修复率(90%)'],
-    roi: '40%',
-    produce:'20%',
-    manyi:'80%'
+    schedule_time: '2024-08-01~2024-10-01',
+    actual_time:'2024-08-01~2024-10-10',
+    spi: '0.8',
+    cpm:'立项（3天）->编码（20天）->测试（10天） 33天'
+  },
+  {
+    key: '1',
+    name: '项目1',
+    schedule_time: '2024-08-01~2024-10-01',
+    actual_time:'2024-08-01~2024-10-10',
+    spi: '1.1',
+    cpm:'立项（10天）->编码（30天）->测试（10天） 50天'
+  },
+  {
+    key: '1',
+    name: '项目2',
+    schedule_time: '2024-08-01~2024-10-01',
+    actual_time:'2024-08-01~2024-10-10',
+    spi: '1.2',
+    cpm:'立项（3天）->编码（20天）->测试（10天） 33天'
+  },
+  {
+    key: '1',
+    name: '项目3',
+    schedule_time: '2024-08-01~2024-10-01',
+    actual_time:'2024-08-01~2024-10-10',
+    spi: '2',
+    cpm:'立项（3天）->编码（20天）->测试（10天） 33天'
   },
 ];
 // Table end

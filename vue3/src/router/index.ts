@@ -10,6 +10,41 @@ const router = createRouter({
       component: HomeView
     },
     {
+      path: '/time',
+      name: 'time',
+      component: () => import('../views/Time.vue')
+    },
+    {
+      path: '/budget',
+      name: 'budget',
+      component: () => import('../views/Budget.vue')
+    },
+    {
+      path: '/qualityfiy',
+      name: 'qualityfiy',
+      component: () => import('../views/Qualityfiy.vue')
+    },
+    {
+      path: '/touzi',
+      name: 'touzi',
+      component: () => import('../views/Touzi.vue')
+    },
+    {
+      path: '/shenchanlv',
+      name: 'touzi',
+      component: () => import('../views/Shenchanlv.vue')
+    },
+    {
+      path: '/manyidu1',
+      name: 'touzi',
+      component: () => import('../views/Manyidu1.vue')
+    },
+    {
+      path: '/manyidu2',
+      name: 'touzi',
+      component: () => import('../views/Manyidu2.vue')
+    },
+    {
       path: '/about',
       name: 'about',
       // route level code-splitting
