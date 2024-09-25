@@ -208,6 +208,11 @@ const columns = [
     dataIndex: 'scen_test',
   },
   {
+    title: '是否为参考项目',
+    key: 'is_base',
+    dataIndex: 'is_base',
+  },
+  {
     title: 'Action',
     key: 'action',
   },
@@ -226,7 +231,8 @@ const data = [
     debug: '2020-01-16~2021-03-20',
     test: '2020-02-16~2021-04-20',
     sys_test:'2020-03-16~2021-05-20',
-    scen_test:'2020-03-16~2021-06-20'
+    scen_test:'2020-03-16~2021-06-20',
+    is_base:'是'
   },
   {
     key: '1',
@@ -240,7 +246,8 @@ const data = [
     debug: '2020-01-16~2021-03-20',
     test: '2020-02-16~2021-04-20',
     sys_test:'2020-03-16~2021-05-20',
-    scen_test:'2020-03-16~2021-06-20'
+    scen_test:'2020-03-16~2021-06-20',
+    is_base:'否'
   },
 ];
 // Table end

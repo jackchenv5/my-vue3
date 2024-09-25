@@ -129,54 +129,6 @@ const items = ref<MenuProps['items']>([
     label: h('a', { href: '/budget', target: '_blank' }, '硬件周期'),
     title: '硬件周期',
   },
-  {
-    key: 'quality',
-    icon: () => h(PropertySafetyFilled),
-    // label: '质量',
-    label: h('a', { href: '/quality', target: '_blank' }, '质量'),
-    title: '质量',
-  },
-  {
-    key: 'tzz',
-    icon: () => h(BookOutlined),
-    // label: '投资回报率（ROI）',
-    label: h('a', { href: '/tzz', target: '_blank' }, '投资回报率（ROI）'),
-    title: '投资回报率（ROI）',
-  },
-  {
-    key: 'shenchanlv',
-    icon: () => h(ProjectOutlined),
-    // label: '生产率',
-    label: h('a', { href: '/shenchanlv', target: '_blank' }, '生产率'),
-    title: '生产率',
-  },
-  {
-    key: 'manyidu1',
-    icon: () => h(WhatsAppOutlined),
-    // label: '客户满意度',
-    label: h('a', { href: '/manyidu1', target: '_blank' }, '客户满意度'),
-    title: '客户满意度',
-  },
-  {
-    key: 'manyidu2',
-    icon: () => h(TeamOutlined),
-    // label: '员工满意度',
-    label: h('a', { href: '/manyidu2', target: '_blank' }, '员工满意度'),
-    title: '员工满意度',
-  },
-  {
-    key: 'zhannue',
-    icon: () => h(ScheduleOutlined),
-    // label: '与战略业务目标的一致性',
-    label: h('a', { href: '/zhannue', target: '_blank' }, '与战略业务目标的一致性'),
-    title: '与战略业务目标的一致性',
-  },
-  {
-    key: 'shezhi',
-    icon: () => h(SettingOutlined),
-    label: '设置',
-    title: '设置',
-  },
 ]);
 
 import * as echarts from 'echarts';
