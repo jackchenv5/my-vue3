@@ -60,7 +60,7 @@ import { MenuProps } from 'ant-design-vue';
 import type { MenuTheme } from 'ant-design-vue';
 const theme = ref<MenuTheme>('dark');
 
-const current = ref<string[]>(['time']);
+const current = ref<string[]>(['manyidu1']);
 const items = ref<MenuProps['items']>([
   {
     key: 'home',
@@ -90,17 +90,17 @@ const items = ref<MenuProps['items']>([
     title: '质量',
   },
   {
-    key: 'touzi',
+    key: 'tzz',
     icon: () => h(BookOutlined),
     // label: '投资回报率（ROI）',
-    label: h('a', { href: '/touzi', target: '_blank' }, '投资回报率（ROI）'),
+    label: h('a', { href: '/tzz', target: '_blank' }, '投资回报率（ROI）'),
     title: '投资回报率（ROI）',
   },
   {
     key: 'shenchanlv',
     icon: () => h(ProjectOutlined),
     // label: '生产率',
-    label: h('a', { href: '/toshenchanlvuzi', target: '_blank' }, '生产率'),
+    label: h('a', { href: '/shenchanlv', target: '_blank' }, '生产率'),
     title: '生产率',
   },
   {
@@ -135,31 +135,56 @@ const items = ref<MenuProps['items']>([
 import { SmileOutlined, DownOutlined } from '@ant-design/icons-vue';
 const columns = [
 {
-    name: '项目名',
-    title: '项目名',
-    dataIndex: 'name',
+    name: '客户满意度得分（Customer Satisfaction Score）',
+    title: '客户满意度得分（Customer Satisfaction Score）',
+    dataIndex: 'csat',
     key: '1',
   },  
 {
-    name: '计划完成时间',
-    title: '计划完成时间',
-    dataIndex: 'schedule_time',
-    key: 'schedule_time',
+    name: '净推荐值（Net Promoter Score, NPS）',
+    title: '净推荐值（Net Promoter Score, NPS）',
+    dataIndex: 'nps',
+    key: 'nps',
   },
   {
-    title: '实际完成时间',
-    dataIndex: 'actual_time',
-    key: 'actual_time',
+    title: '客户努力分数（Customer Effort Score, CES）',
+    dataIndex: 'ces',
+    key: 'ces',
   },
   {
-    title: '进度绩效指数（已经完成的工作的价值/计划完成的工作价值）',
-    key: 'spi',
-    dataIndex: 'spi',
+    title: '客户忠诚度（Customer Loyalty）',
+    key: 'cl',
+    dataIndex: 'cl',
   },
   {
-    title: '关键路径时间',
-    key: 'cpm',
-    dataIndex: 'cpm',
+    title: '投诉率（Complaint Rate）',
+    key: 'cr',
+    dataIndex: 'cr',
+  },
+  {
+    title: '解决投诉的时间（Time to Resolve Complaints）',
+    key: 'torc',
+    dataIndex: 'torc',
+  },
+  {
+    title: '客户反馈响应时间（Response Time to Customer Feedback）',
+    key: 'rtcf',
+    dataIndex: 'rtcf',
+  },
+  {
+    title: '客户保留率（Customer Retention Rate）',
+    key: 'crr',
+    dataIndex: 'crr',
+  },
+  {
+    title: '客户流失率（Customer Churn Rate）',
+    key: 'c_churn_rate',
+    dataIndex: 'c_churn_rate',
+  },
+  {
+    title: '客户参与度（Customer Engagement）',
+    key: 'ce',
+    dataIndex: 'ce',
   },
 ];
 
@@ -167,50 +192,44 @@ const data = [
   {
     key: '1',
     name: '项目1',
-    schedule_time: '2024-08-01~2024-10-01',
-    actual_time:'2024-08-01~2024-10-10',
-    spi: '2',
-    cpm:'立项（10天）->编码（30天）->测试（10天） 50天'
+    csat:'80%',
+    nps:'80%',
+    ces:'80%',
+    cl:'80%',
+    cr:'10%',
+    torc:'80%',
+    rtcf: '80%',
+    crr:'80%',
+    c_churn_rate: '80%',
+    ce:'80%'
   },
-  {
+    {
     key: '1',
     name: '项目2',
-    schedule_time: '2024-08-01~2024-10-01',
-    actual_time:'2024-08-01~2024-10-10',
-    spi: '1.2',
-    cpm:'立项（3天）->编码（20天）->测试（10天） 33天'
+    csat:'80%',
+    nps:'80%',
+    ces:'80%',
+    cl:'80%',
+    cr:'10%',
+    torc:'80%',
+    rtcf: '80%',
+    crr:'80%',
+    c_churn_rate: '80%',
+    ce:'80%'
   },
   {
     key: '1',
     name: '项目3',
-    schedule_time: '2024-08-01~2024-10-01',
-    actual_time:'2024-08-01~2024-10-10',
-    spi: '0.8',
-    cpm:'立项（3天）->编码（20天）->测试（10天） 33天'
-  },
-  {
-    key: '1',
-    name: '项目1',
-    schedule_time: '2024-08-01~2024-10-01',
-    actual_time:'2024-08-01~2024-10-10',
-    spi: '1.1',
-    cpm:'立项（10天）->编码（30天）->测试（10天） 50天'
-  },
-  {
-    key: '1',
-    name: '项目2',
-    schedule_time: '2024-08-01~2024-10-01',
-    actual_time:'2024-08-01~2024-10-10',
-    spi: '1.2',
-    cpm:'立项（3天）->编码（20天）->测试（10天） 33天'
-  },
-  {
-    key: '1',
-    name: '项目3',
-    schedule_time: '2024-08-01~2024-10-01',
-    actual_time:'2024-08-01~2024-10-10',
-    spi: '2',
-    cpm:'立项（3天）->编码（20天）->测试（10天） 33天'
+    csat:'80%',
+    nps:'80%',
+    ces:'80%',
+    cl:'80%',
+    cr:'10%',
+    torc:'80%',
+    rtcf: '80%',
+    crr:'80%',
+    c_churn_rate: '80%',
+    ce:'80%'
   },
 ];
 // Table end

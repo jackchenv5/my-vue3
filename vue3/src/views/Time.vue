@@ -1,60 +1,107 @@
 <template>
   <div style="">
     <a-menu background="red" v-model:selectedKeys="current" mode="horizontal" :items="items" :theme="theme"  style="height: 5vh;"/>
-    <div style="display: flex;width: 100%;height: 94vh;">
-      <div style="width: 18vw;padding: 2%;background-color: aliceblue;">
-        <h3>项目选择区</h3>
-        <a-tree
-    v-model:expandedKeys="expandedKeys"
-    v-model:selectedKeys="selectedKeys"
-    v-model:checkedKeys="checkedKeys"
-    checkable
-    :tree-data="treeData"
-  >
-    <template #title="{ title, key }">
-      <span v-if="key === '0-0-1-0'" style="color: #1890ff">{{ title }}</span>
-      <template v-else>{{ title }}</template>
-    </template>
-  </a-tree>
-      </div>
-      <div style="width: 80vw;margin-left: 10px;">
-        <a-table :columns="columns" :data-source="data" bordered>
-    <template #headerCell="{ column }">
-      <template v-if="column.key === 'name'">
+    <div style="display: flex;flex-direction: column;width: 100%;height: 94vh;">
+        <div style="margin-top: 10px;">
+          <a-form :model="formState"  layout="inline">
+            <a-form-item label="业务类型">
+              <a-select ref="select" style="width: 200px" >
+                <a-select-option value="主干版本">主干版本</a-select-option>
+                <a-select-option value="单点需求定制">单点需求定制</a-select-option>
+                <a-select-option value="战略合作" >战略合作</a-select-option>
+                <a-select-option value="技术预研">技术预研</a-select-option>
+                <a-select-option value="技术预研">新品研发</a-select-option>
+                <a-select-option value="技术预研">特性项目</a-select-option>
+                <a-select-option value="技术预研">老品改进</a-select-option>
+                <a-select-option value="技术预研">重大入围</a-select-option>
+                <a-select-option value="技术预研">其它</a-select-option>
+              </a-select>
+            </a-form-item>
+            <a-form-item label="产品类别">
+              <a-select ref="select" style="width: 200px" >
+                <a-select-option value="主干版本">TAP</a-select-option>
+                <a-select-option value="单点需求定制">交换机</a-select-option>
+                <a-select-option value="安全产品" >安全产品</a-select-option>
+                <a-select-option value="平台版本">平台版本</a-select-option>
+                <a-select-option value="应用软件">应用软件</a-select-option>
+                <a-select-option value="无线产品">无线产品</a-select-option>
+                <a-select-option value="硬件定制">硬件定制</a-select-option>
+                <a-select-option value="网卡">网卡</a-select-option>
+                <a-select-option value="通信融合">通信融合</a-select-option>
+                <a-select-option value="解决方案">解决方案</a-select-option>
+                <a-select-option value="路由器">路由器</a-select-option>
+                <a-select-option value="其它">其它</a-select-option>
+              </a-select>
+            </a-form-item>
+          </a-form>
+        </div>
+  <a-tabs v-model:activeKey="activeKey" size="large" type="card" style="margin-top: 10px;">
+    <a-tab-pane key="1">
+      <template #tab>
         <span>
-          <smile-outlined />
-          项目名
+          <TableOutlined />
+          数据表
         </span>
       </template>
-    </template>
 
-    <template #bodyCell="{ column, record }">
-      <template v-if="column.key === 'name'">
-        <a>
-          {{ record.name }}
-        </a>
-      </template>
-      <template v-else-if="column.key === 'tags'">
+        <a-table :columns="columns" :data-source="data" bordered :row-selection="rowSelection">
+          <template #headerCell="{ column }">
+            <template v-if="column.key === 'name'">
+              <span>
+                <smile-outlined />
+                项目名
+              </span>
+            </template>
+          </template>
+
+          <template #bodyCell="{ column, record }">
+            <template v-if="column.key === 'name'">
+              <a v-if="record.name === '基准指标'" style="color: red;">{{ record.name }}</a>
+              <a v-else >{{ record.name }}</a>
+            </template>
+            <template v-if="column.key === 'age'">
+              <span v-if="record.age > 1" style="color: red;">{{ record.age }}</span>
+            </template>
+            <template v-if="column.key === 'address'">
+              <span v-if="record.address > 1" style="color: red;">{{ record.address }}</span>
+            </template>
+            <template v-else-if="column.key === 'is_base'">
+              <span>
+                <!-- <a-tag> -->
+                  <span v-if="record.is_base === '是'" style="color: red;font-size: 16px;"><CheckCircleOutlined/></span>
+                  <span v-else style="color: gainsboro;font-size: 16px;"><CloseCircleOutlined/></span>
+                <!-- </a-tag> -->
+              </span>
+            </template>
+            <template v-else-if="column.key === 'action'">
         <span>
-          <a-tag
-            v-for="tag in record.tags"
-            :key="tag"
-            :color="tag === 'loser' ? 'volcano' : tag.length > 5 ? 'geekblue' : 'green'"
-          >
-            {{ tag.toUpperCase() }}
-          </a-tag>
+          <a>标记为参考项目</a>
+          <a-divider type="vertical" />
+          <a>取消标记</a>
         </span>
       </template>
-    </template>
-  </a-table>
+          </template>
+        </a-table>
+    </a-tab-pane>
+    <a-tab-pane key="2"  force-render>
+      <template #tab>
+        <span>
+          <PieChartOutlined />
+          甘特图
+        </span>
+      </template>
+      <!-- <div ref="chartRef" style="height: 80vh;width: 100%;"></div> -->
+      <div ref="ganttContainer" :style="{ width: '100vw', height: '80vh' }"></div>
+    </a-tab-pane>
+  </a-tabs>
+
       </div>
     </div>
-  </div>
   
 </template>
 <script lang="ts" setup>
-import { h, ref } from 'vue';
-import { HomeOutlined,DollarCircleOutlined,FieldTimeOutlined,ProjectOutlined,SettingOutlined,BookOutlined,PropertySafetyFilled,TeamOutlined,WhatsAppOutlined, ScheduleOutlined } from '@ant-design/icons-vue';
+import { h, ref,watch,onMounted,nextTick } from 'vue';
+import { CloseCircleOutlined,CheckCircleOutlined,PieChartOutlined,TableOutlined,HomeOutlined,DollarCircleOutlined,FieldTimeOutlined,ProjectOutlined,SettingOutlined,BookOutlined,PropertySafetyFilled,TeamOutlined,WhatsAppOutlined, ScheduleOutlined } from '@ant-design/icons-vue';
 import { MenuProps } from 'ant-design-vue';
 
 import type { MenuTheme } from 'ant-design-vue';
@@ -65,207 +112,180 @@ const items = ref<MenuProps['items']>([
   {
     key: 'home',
     icon: () => h(HomeOutlined),
-    label: h('a', { href: '/', target: '_blank' }, '项目度量首页'),
-    title: '项目度量首页',
+    label: h('a', { href: '/', target: '_blank' }, '周期及计划达成率'),
+    title: '周期及计划达成率',
   },
   {
     key: 'time',
     icon: () => h(FieldTimeOutlined),
     // label: '时间',
-    label: h('a', { href: '/time', target: '_blank' }, '时间'),
-    title: '时间',
+    label: h('a', { href: '/time', target: '_blank' }, '软件周期'),
+    title: '软件周期',
   },
   {
-    key: 'budget',
+    key: '硬件周期',
     icon: () => h(DollarCircleOutlined),
     // label: '预算',
-    label: h('a', { href: '/budget', target: '_blank' }, '预算'),
-    title: '预算',
-  },
-  {
-    key: 'quality',
-    icon: () => h(PropertySafetyFilled),
-    // label: '质量',
-    label: h('a', { href: '/quality', target: '_blank' }, '质量'),
-    title: '质量',
-  },
-  {
-    key: 'touzi',
-    icon: () => h(BookOutlined),
-    // label: '投资回报率（ROI）',
-    label: h('a', { href: '/touzi', target: '_blank' }, '投资回报率（ROI）'),
-    title: '投资回报率（ROI）',
-  },
-  {
-    key: 'shenchanlv',
-    icon: () => h(ProjectOutlined),
-    // label: '生产率',
-    label: h('a', { href: '/toshenchanlvuzi', target: '_blank' }, '生产率'),
-    title: '生产率',
-  },
-  {
-    key: 'manyidu1',
-    icon: () => h(WhatsAppOutlined),
-    // label: '客户满意度',
-    label: h('a', { href: '/manyidu1', target: '_blank' }, '客户满意度'),
-    title: '客户满意度',
-  },
-  {
-    key: 'manyidu2',
-    icon: () => h(TeamOutlined),
-    // label: '员工满意度',
-    label: h('a', { href: '/manyidu2', target: '_blank' }, '员工满意度'),
-    title: '员工满意度',
-  },
-  {
-    key: 'zhannue',
-    icon: () => h(ScheduleOutlined),
-    // label: '与战略业务目标的一致性',
-    label: h('a', { href: '/zhannue', target: '_blank' }, '与战略业务目标的一致性'),
-    title: '与战略业务目标的一致性',
-  },
-  {
-    key: 'shezhi',
-    icon: () => h(SettingOutlined),
-    label: '设置',
-    title: '设置',
+    label: h('a', { href: '/budget', target: '_blank' }, '硬件周期'),
+    title: '硬件周期',
   },
 ]);
+
+
+//tabs
+const activeKey = ref('1');
+//tabs end
+
+
 // Table start
 import { SmileOutlined, DownOutlined } from '@ant-design/icons-vue';
+const rowSelection: TableProps['rowSelection'] = {
+  onChange: (selectedRowKeys: string[], selectedRows: DataType[]) => {
+    console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
+  },
+  getCheckboxProps: (record: DataType) => ({
+    disabled: record.name === 'Disabled User', // Column configuration not to be checked
+    name: record.name,
+  }),
+};
+
 const columns = [
-{
+  {
+    name: 'ID',
+    title: 'ID',
+    dataIndex: 'id',
+    key: 'id',
+  },
+  {
     name: '项目名',
     title: '项目名',
     dataIndex: 'name',
-    key: '1',
-  },  
-{
-    name: '计划完成时间',
-    title: '计划完成时间',
-    dataIndex: 'schedule_time',
-    key: 'schedule_time',
+    key: 'name',
   },
   {
-    title: '实际完成时间',
-    dataIndex: 'actual_time',
-    key: 'actual_time',
+    title: '创建年份',
+    dataIndex: 'create_year',
+    key: 'create_year',
   },
   {
-    title: '进度绩效指数（已经完成的工作的价值/计划完成的工作价值）',
-    key: 'spi',
-    dataIndex: 'spi',
+    title: '发布年份',
+    dataIndex: 'publish_year',
+    key: 'publish_year',
   },
   {
-    title: '关键路径时间',
-    key: 'cpm',
-    dataIndex: 'cpm',
+    title: '需求',
+    key: 'need',
+    dataIndex: 'need',
+  },
+  {
+    title: '总体方案及计划',
+    key: 'schedule',
+    dataIndex: 'schedule',
+  },
+  {
+    title: '设计及编码',
+    key: 'code',
+    dataIndex: 'code',
+  },
+  {
+    title: '集成调试',
+    key: 'debug',
+    dataIndex: 'debug',
+  },
+  {
+    title: '集成测试',
+    key: 'test',
+    dataIndex: 'test',
+  },
+  {
+    title: '系统测试',
+    key: 'sys_test',
+    dataIndex: 'sys_test',
+  },
+  {
+    title: '场景测试',
+    key: 'scen_test',
+    dataIndex: 'scen_test',
+  },
+  {
+    title: 'Action',
+    key: 'action',
   },
 ];
 
 const data = [
   {
-    key: '1',
+    key: '0',
+    id:1,
     name: '项目1',
-    schedule_time: '2024-08-01~2024-10-01',
-    actual_time:'2024-08-01~2024-10-10',
-    spi: '2',
-    cpm:'立项（10天）->编码（30天）->测试（10天） 50天'
+    create_year:'2020年',
+    publish_year:'2021年',
+    need:'2020-11-20~2020-11-30',
+    schedule: '2020-11-31~2020-12-15',
+    code: '2020-12-16~2021-02-20',
+    debug: '2020-01-16~2021-03-20',
+    test: '2020-02-16~2021-04-20',
+    sys_test:'2020-03-16~2021-05-20',
+    scen_test:'2020-03-16~2021-06-20'
   },
   {
     key: '1',
+    id:2,
     name: '项目2',
-    schedule_time: '2024-08-01~2024-10-01',
-    actual_time:'2024-08-01~2024-10-10',
-    spi: '1.2',
-    cpm:'立项（3天）->编码（20天）->测试（10天） 33天'
-  },
-  {
-    key: '1',
-    name: '项目3',
-    schedule_time: '2024-08-01~2024-10-01',
-    actual_time:'2024-08-01~2024-10-10',
-    spi: '0.8',
-    cpm:'立项（3天）->编码（20天）->测试（10天） 33天'
-  },
-  {
-    key: '1',
-    name: '项目1',
-    schedule_time: '2024-08-01~2024-10-01',
-    actual_time:'2024-08-01~2024-10-10',
-    spi: '1.1',
-    cpm:'立项（10天）->编码（30天）->测试（10天） 50天'
-  },
-  {
-    key: '1',
-    name: '项目2',
-    schedule_time: '2024-08-01~2024-10-01',
-    actual_time:'2024-08-01~2024-10-10',
-    spi: '1.2',
-    cpm:'立项（3天）->编码（20天）->测试（10天） 33天'
-  },
-  {
-    key: '1',
-    name: '项目3',
-    schedule_time: '2024-08-01~2024-10-01',
-    actual_time:'2024-08-01~2024-10-10',
-    spi: '2',
-    cpm:'立项（3天）->编码（20天）->测试（10天） 33天'
+    create_year:'2020年',
+    publish_year:'2021年',
+    need:'2020-11-20~2020-11-30',
+    schedule: '2020-11-31~2020-12-15',
+    code: '2020-12-16~2021-02-20',
+    debug: '2020-01-16~2021-03-20',
+    test: '2020-02-16~2021-04-20',
+    sys_test:'2020-03-16~2021-05-20',
+    scen_test:'2020-03-16~2021-06-20'
   },
 ];
 // Table end
 
-//Tree start
-import {watch } from 'vue';
-import type { TreeProps } from 'ant-design-vue';
 
-const treeData: TreeProps['treeData'] = [
-  {
-    title: '全部项目',
-    key: '0-0',
-    children: [
-      {
-        title: '在研',
-        key: '0-0-0',
-        children: [
-          { title: '交换机', 
-            key: '0-0-0-0',
-            children: [
-          { title: '项目1', key: '0-0-0-0-0'},
-          { title: '项目2', key: '0-0-0-0-1' },
-          { title: '项目3', key: '0-0-0-0-2' },
-          { title: '项目4', key: '0-0-0-0-3' },
-        ]},
-          { title: '路由器', key: '0-0-0-1' },
-          { title: '安全产品', key: '0-0-0-2' },
-          { title: '通信融合', key: '0-0-0-3' },
-        ],
-      },
-      {
-        title: '结项',
-        key: '0-0-1',
-      },
-      {
-        title: '终止',
-        key: '0-0-1',
-      },
-    ],
-  },
-];
+//gant start
+import { gantt } from 'dhtmlx-gantt';
 
-const expandedKeys = ref<string[]>(['0-0-0', '0-0-1']);
-const selectedKeys = ref<string[]>(['0-0-0', '0-0-1']);
-const checkedKeys = ref<string[]>(['0-0-0', '0-0-1']);
-watch(expandedKeys, () => {
-  console.log('expandedKeys', expandedKeys);
+
+// 引入 dhtmlxGantt 的样式
+import 'dhtmlx-gantt/codebase/dhtmlxgantt.css';
+
+const ganttContainer = ref();
+
+onMounted(() => {
+  // 初始化 gantt 图
+
+  // 配置 gantt 图
+  gantt.init(ganttContainer.value);
+  gantt.config.scale_unit = "day";
+  gantt.i18n.setLocale("cn");
+  gantt.config.grid_resize = true;
+  gantt.config.grid_width = 300;
+
+  // 禁用添加按钮和编辑功能
+  gantt.config.show_add_task_button = false;
+
+  gantt.config.readonly = true; // 禁用所有编辑功能
+  gantt.parse({
+			data: [
+				{ id: 1, text: "Project #2", start_date: "01-04-2023", duration: 18, progress: 0.4, open: true },
+				{ id: 2, text: "Task #1", start_date: "02-04-2023", duration: 8, progress: 0.6, parent: 1 },
+				{ id: 3, text: "Task #2", start_date: "11-04-2023", duration: 8, progress: 0.6, parent: 1 }
+			],
+			links: [
+				{id: 1, source: 1, target: 2, type: "1"},
+				{id: 2, source: 2, target: 3, type: "0"}
+			]
+		});
+
+  // 渲染 gantt 图
+
+  gantt.render();
 });
-watch(selectedKeys, () => {
-  console.log('selectedKeys', selectedKeys);
-});
-watch(checkedKeys, () => {
-  console.log('checkedKeys', checkedKeys);
-});
-//Tree end
+//gant end
 </script>
 
 

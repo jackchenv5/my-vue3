@@ -60,7 +60,7 @@ import { MenuProps } from 'ant-design-vue';
 import type { MenuTheme } from 'ant-design-vue';
 const theme = ref<MenuTheme>('dark');
 
-const current = ref<string[]>(['time']);
+const current = ref<string[]>(['shenchanlv']);
 const items = ref<MenuProps['items']>([
   {
     key: 'home',
@@ -90,17 +90,17 @@ const items = ref<MenuProps['items']>([
     title: '质量',
   },
   {
-    key: 'touzi',
+    key: 'tzz',
     icon: () => h(BookOutlined),
     // label: '投资回报率（ROI）',
-    label: h('a', { href: '/touzi', target: '_blank' }, '投资回报率（ROI）'),
+    label: h('a', { href: '/tzz', target: '_blank' }, '投资回报率（ROI）'),
     title: '投资回报率（ROI）',
   },
   {
     key: 'shenchanlv',
     icon: () => h(ProjectOutlined),
     // label: '生产率',
-    label: h('a', { href: '/toshenchanlvuzi', target: '_blank' }, '生产率'),
+    label: h('a', { href: '/shenchanlv', target: '_blank' }, '生产率'),
     title: '生产率',
   },
   {
@@ -141,25 +141,50 @@ const columns = [
     key: '1',
   },  
 {
-    name: '计划完成时间',
-    title: '计划完成时间',
-    dataIndex: 'schedule_time',
-    key: 'schedule_time',
+    name: '任务完成率',
+    title: '任务完成率',
+    dataIndex: 'task_complete_rate',
+    key: 'task_complete_rate',
   },
   {
-    title: '实际完成时间',
-    dataIndex: 'actual_time',
-    key: 'actual_time',
+    title: '工作小时效率',
+    dataIndex: 'efficiency_per_hour',
+    key: 'efficiency_per_hour',
   },
   {
-    title: '进度绩效指数（已经完成的工作的价值/计划完成的工作价值）',
-    key: 'spi',
-    dataIndex: 'spi',
+    title: '缺陷修复速度',
+    key: 'defect_fix_velocity',
+    dataIndex: 'defect_fix_velocity',
   },
   {
-    title: '关键路径时间',
-    key: 'cpm',
-    dataIndex: 'cpm',
+    title: '生产率指数',
+    key: 'pi',
+    dataIndex: 'pi',
+  },
+  {
+    title: '人天产出',
+    key: 'opp',
+    dataIndex: 'opp',
+  },
+  {
+    title: '吞吐量（Throughput）',
+    key: 'throughput',
+    dataIndex: 'throughput',
+  },
+  {
+    title: '周转时间（Lead Time)',
+    key: 'lead_time',
+    dataIndex: 'lead_time',
+  },
+  {
+    title: '利用率（Utilization Rate)',
+    key: 'ur',
+    dataIndex: 'ur',
+  },
+  {
+    title: '循环时间（Cycle Time）',
+    key: 'cycle_time',
+    dataIndex: 'cycle_time',
   },
 ];
 
@@ -167,50 +192,41 @@ const data = [
   {
     key: '1',
     name: '项目1',
-    schedule_time: '2024-08-01~2024-10-01',
-    actual_time:'2024-08-01~2024-10-10',
-    spi: '2',
-    cpm:'立项（10天）->编码（30天）->测试（10天） 50天'
+    task_complete_rate: '90%',
+    efficiency_per_hour:'`10行',
+    defect_fix_velocity: '2/天',
+    pi: '90%',
+    opp: '100行/天',
+    throughput:'1000行/天',
+    lead_time: '10天',
+    ur:'80%',
+    cycle_time:'2天',
   },
   {
     key: '1',
     name: '项目2',
-    schedule_time: '2024-08-01~2024-10-01',
-    actual_time:'2024-08-01~2024-10-10',
-    spi: '1.2',
-    cpm:'立项（3天）->编码（20天）->测试（10天） 33天'
+    task_complete_rate: '90%',
+    efficiency_per_hour:'`10行',
+    defect_fix_velocity: '2/天',
+    pi: '90%',
+    opp: '100行/天',
+    throughput:'1000行/天',
+    lead_time: '10天',
+    ur:'80%',
+    cycle_time:'2天',
   },
   {
     key: '1',
     name: '项目3',
-    schedule_time: '2024-08-01~2024-10-01',
-    actual_time:'2024-08-01~2024-10-10',
-    spi: '0.8',
-    cpm:'立项（3天）->编码（20天）->测试（10天） 33天'
-  },
-  {
-    key: '1',
-    name: '项目1',
-    schedule_time: '2024-08-01~2024-10-01',
-    actual_time:'2024-08-01~2024-10-10',
-    spi: '1.1',
-    cpm:'立项（10天）->编码（30天）->测试（10天） 50天'
-  },
-  {
-    key: '1',
-    name: '项目2',
-    schedule_time: '2024-08-01~2024-10-01',
-    actual_time:'2024-08-01~2024-10-10',
-    spi: '1.2',
-    cpm:'立项（3天）->编码（20天）->测试（10天） 33天'
-  },
-  {
-    key: '1',
-    name: '项目3',
-    schedule_time: '2024-08-01~2024-10-01',
-    actual_time:'2024-08-01~2024-10-10',
-    spi: '2',
-    cpm:'立项（3天）->编码（20天）->测试（10天） 33天'
+    task_complete_rate: '90%',
+    efficiency_per_hour:'`10行',
+    defect_fix_velocity: '2/天',
+    pi: '90%',
+    opp: '100行/天',
+    throughput:'1000行/天',
+    lead_time: '10天',
+    ur:'80%',
+    cycle_time:'2天',
   },
 ];
 // Table end

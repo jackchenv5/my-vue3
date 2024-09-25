@@ -20,28 +20,28 @@ const router = createRouter({
       component: () => import('../views/Budget.vue')
     },
     {
-      path: '/qualityfiy',
-      name: 'qualityfiy',
+      path: '/quality',
+      name: 'quality',
       component: () => import('../views/Qualityfiy.vue')
     },
     {
-      path: '/touzi',
-      name: 'touzi',
+      path: '/tzz',
+      name: 'tzz',
       component: () => import('../views/Touzi.vue')
     },
     {
       path: '/shenchanlv',
-      name: 'touzi',
+      name: 'shenchanlv',
       component: () => import('../views/Shenchanlv.vue')
     },
     {
       path: '/manyidu1',
-      name: 'touzi',
+      name: 'manyidu1',
       component: () => import('../views/Manyidu1.vue')
     },
     {
       path: '/manyidu2',
-      name: 'touzi',
+      name: 'manyidu2',
       component: () => import('../views/Manyidu2.vue')
     },
     {

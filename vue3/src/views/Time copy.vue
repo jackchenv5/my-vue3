@@ -87,7 +87,7 @@
       <template #tab>
         <span>
           <PieChartOutlined />
-          散点图
+          甘特图
         </span>
       </template>
       <!-- <div ref="chartRef" style="height: 80vh;width: 100%;"></div> -->
@@ -107,7 +107,7 @@ import { MenuProps } from 'ant-design-vue';
 import type { MenuTheme } from 'ant-design-vue';
 const theme = ref<MenuTheme>('dark');
 
-const current = ref<string[]>(['home']);
+const current = ref<string[]>(['time']);
 const items = ref<MenuProps['items']>([
   {
     key: 'home',
@@ -286,8 +286,8 @@ onMounted(() => {
           left: 'right',
           top: '5%',
           dimension: 1,
-          min: 30,
-          max: 160,
+          min: 50,
+          max: 200,
           itemWidth: 30,
           itemHeight: 120,
           calculable: true,
@@ -313,15 +313,14 @@ onMounted(() => {
         {
           left: 'right',
           top: '40%',
-          dimension: 2,
+          dimension: 3,
           min: 0,
-          max: 20,
+          max: 100,
           itemHeight: 120,
-          calculable: true,
-          text: ['明暗变化：延迟天数'],
+          text: ['明暗变化：项目达成率'],
           textGap: 30,
           inRange: {
-            colorLightness: [1, 0.5]
+            colorLightness: [0.9, 0.5]
           },
           outOfRange: {
             color: ['rgba(255,255,255,0.4)']
@@ -335,31 +334,26 @@ onMounted(() => {
             }
           }
         },
-        // {
-        //     left: 'right',
-        //     bottom: '5%',
-        //     dimension: 3,
-        //     min: 0,
-        //     max: 100,
-        //     itemHeight: 80,
-        //     text: ['色彩渐变：计划达成率'],
-        //     realtime: false,
-        //     calculable: true,
-        //     inRange: {
-        //         color: ['yellow', 'red'] // 渐变颜色
-        //     }
-        // },
+        {
+            left: 'right',
+            bottom: '5%',
+            dimension: 2,
+            min: 0,
+            max: 20,
+            itemHeight: 80,
+            text: ['色彩渐变：延迟天数'],
+            realtime: false,
+            calculable: true,
+            inRange: {
+                color: ['yellow', 'red'] // 渐变颜色
+            }
+        },
       ],
       series: [
         {
           name: '实际项目周期',
           type: 'scatter',
           itemStyle: itemStyle,
-          encode: { // 使用encode来指定数据列与坐标轴的关系
-          x: 0, // 第2个元素作为X轴的值
-          y: 1, // 第4个元素（索引为3）作为Y轴的值
-          tooltip: [0, 1, 2, 3, 4] // 可选，用于定义tooltip中显示哪些字段
-        },
           markLine: {
             symbol: 'none', // 不显示标记点
             lineStyle: {
@@ -451,39 +445,39 @@ const columns = [
     key: 'publish_year',
   },
   {
-    title: '立项时间',
-    key: 'flag_time',
-    dataIndex: 'flag_time',
+    title: '需求',
+    key: 'need',
+    dataIndex: 'need',
   },
   {
-    title: '计划发布时间（TR5）',
-    key: 'schedule_tr5_time',
-    dataIndex: 'schedule_tr5_time',
+    title: '总体方案及计划',
+    key: 'schedule',
+    dataIndex: 'schedule',
   },
   {
-    title: '实际发布时间（TR5）',
-    key: 'ac_tr5_time',
-    dataIndex: 'ac_tr5_time',
+    title: '设计及编码',
+    key: 'code',
+    dataIndex: 'code',
   },
   {
-    title: '延迟天数',
-    key: 'delay_time',
-    dataIndex: 'delay_time',
+    title: '集成调试',
+    key: 'debug',
+    dataIndex: 'debug',
   },
   {
-    title: 'TR5达成率',
-    key: 'tr5_rate',
-    dataIndex: 'tr5_rate',
+    title: '集成测试',
+    key: 'test',
+    dataIndex: 'test',
   },
   {
-    title: '项目实际周期',
-    key: 'ac_time',
-    dataIndex: 'ac_time',
+    title: '系统测试',
+    key: 'sys_test',
+    dataIndex: 'sys_test',
   },
   {
-    title: '是否为参考项目',
-    key: 'is_base',
-    dataIndex: 'is_base',
+    title: '场景测试',
+    key: 'scen_test',
+    dataIndex: 'scen_test',
   },
   {
     title: 'Action',
@@ -498,13 +492,13 @@ const data = [
     name: '项目1',
     create_year:'2020年',
     publish_year:'2021年',
-    flag_time:'2020-11-20',
-    schedule_tr5_time: '2021-11-20',
-    ac_tr5_time: '2020-12-20',
-    delay_time: 30,
-    tr5_rate: '90%',
-    ac_time:120,
-    is_base:'是'
+    need:'2020-11-20~2020-11-30',
+    schedule: '2020-11-31~2020-12-15',
+    code: '2020-12-16~2021-02-20',
+    debug: '2020-01-16~2021-03-20',
+    test: '2020-02-16~2021-04-20',
+    sys_test:'2020-03-16~2021-05-20',
+    scen_test:'2020-03-16~2021-06-20'
   },
   {
     key: '1',
@@ -512,16 +506,69 @@ const data = [
     name: '项目2',
     create_year:'2020年',
     publish_year:'2021年',
-    flag_time:'2020-11-20',
-    schedule_tr5_time: '2021-11-20',
-    ac_tr5_time: '2020-12-20',
-    delay_time: 30,
-    tr5_rate: '90%',
-    ac_time:130,
-    is_base:'否'
+    need:'2020-11-20~2020-11-30',
+    schedule: '2020-11-31~2020-12-15',
+    code: '2020-12-16~2021-02-20',
+    debug: '2020-01-16~2021-03-20',
+    test: '2020-02-16~2021-04-20',
+    sys_test:'2020-03-16~2021-05-20',
+    scen_test:'2020-03-16~2021-06-20'
   },
 ];
 // Table end
+
+//Tree start
+import {watch } from 'vue';
+import type { TreeProps } from 'ant-design-vue';
+
+const treeData: TreeProps['treeData'] = [
+  {
+    title: '全部项目',
+    key: '0-0',
+    children: [
+      {
+        title: '在研',
+        key: '0-0-0',
+        children: [
+          { title: '交换机', 
+            key: '0-0-0-0',
+            children: [
+          { title: '项目1', key: '0-0-0-0-0'},
+          { title: '项目2', key: '0-0-0-0-1' },
+          { title: '项目3', key: '0-0-0-0-2' },
+          { title: '项目4', key: '0-0-0-0-3' },
+        ]},
+          { title: '路由器', key: '0-0-0-1' },
+          { title: '安全产品', key: '0-0-0-2' },
+          { title: '通信融合', key: '0-0-0-3' },
+        ],
+      },
+      {
+        title: '结项',
+        key: '0-0-1',
+      },
+      {
+        title: '终止',
+        key: '0-0-1',
+      },
+    ],
+  },
+];
+
+const expandedKeys = ref<string[]>(['0-0-0', '0-0-1']);
+const selectedKeys = ref<string[]>(['0-0-0', '0-0-1']);
+const checkedKeys = ref<string[]>(['0-0-0', '0-0-1']);
+watch(expandedKeys, () => {
+  console.log('expandedKeys', expandedKeys);
+});
+watch(selectedKeys, () => {
+  console.log('selectedKeys', selectedKeys);
+});
+watch(checkedKeys, () => {
+  console.log('checkedKeys', checkedKeys);
+});
+//Tree end
+
 // form start
 import { reactive, toRaw } from 'vue';
 import type { UnwrapRef } from 'vue';

@@ -90,17 +90,17 @@ const items = ref<MenuProps['items']>([
     title: '质量',
   },
   {
-    key: 'touzi',
+    key: 'tzz',
     icon: () => h(BookOutlined),
     // label: '投资回报率（ROI）',
-    label: h('a', { href: '/touzi', target: '_blank' }, '投资回报率（ROI）'),
+    label: h('a', { href: '/tzz', target: '_blank' }, '投资回报率（ROI）'),
     title: '投资回报率（ROI）',
   },
   {
     key: 'shenchanlv',
     icon: () => h(ProjectOutlined),
     // label: '生产率',
-    label: h('a', { href: '/toshenchanlvuzi', target: '_blank' }, '生产率'),
+    label: h('a', { href: '/shenchanlv', target: '_blank' }, '生产率'),
     title: '生产率',
   },
   {

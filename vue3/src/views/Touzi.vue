@@ -2,7 +2,7 @@
   <div style="">
     <a-menu background="red" v-model:selectedKeys="current" mode="horizontal" :items="items" :theme="theme"  style="height: 5vh;"/>
     <div style="display: flex;width: 100%;height: 94vh;">
-      <div style="width: 18vw;padding: 2%;background-color: aliceblue;">
+      <div style="width: 10vw;background-color: aliceblue;">
         <h3>项目选择区</h3>
         <a-tree
     v-model:expandedKeys="expandedKeys"
@@ -17,7 +17,7 @@
     </template>
   </a-tree>
       </div>
-      <div style="width: 80vw;margin-left: 10px;">
+      <div style="width: 90vw;">
         <a-table :columns="columns" :data-source="data" bordered>
     <template #headerCell="{ column }">
       <template v-if="column.key === 'name'">
@@ -60,7 +60,7 @@ import { MenuProps } from 'ant-design-vue';
 import type { MenuTheme } from 'ant-design-vue';
 const theme = ref<MenuTheme>('dark');
 
-const current = ref<string[]>(['time']);
+const current = ref<string[]>(['tzz']);
 const items = ref<MenuProps['items']>([
   {
     key: 'home',
@@ -90,17 +90,17 @@ const items = ref<MenuProps['items']>([
     title: '质量',
   },
   {
-    key: 'touzi',
+    key: 'tzz',
     icon: () => h(BookOutlined),
     // label: '投资回报率（ROI）',
-    label: h('a', { href: '/touzi', target: '_blank' }, '投资回报率（ROI）'),
+    label: h('a', { href: '/tzz', target: '_blank' }, '投资回报率（ROI）'),
     title: '投资回报率（ROI）',
   },
   {
     key: 'shenchanlv',
     icon: () => h(ProjectOutlined),
     // label: '生产率',
-    label: h('a', { href: '/toshenchanlvuzi', target: '_blank' }, '生产率'),
+    label: h('a', { href: '/shenchanlv', target: '_blank' }, '生产率'),
     title: '生产率',
   },
   {
@@ -141,25 +141,40 @@ const columns = [
     key: '1',
   },  
 {
-    name: '计划完成时间',
-    title: '计划完成时间',
-    dataIndex: 'schedule_time',
-    key: 'schedule_time',
+    name: '投资回报率ROI',
+    title: '投资回报率（Return on Investment）',
+    dataIndex: 'roi',
+    key: 'roi',
   },
   {
-    title: '实际完成时间',
-    dataIndex: 'actual_time',
-    key: 'actual_time',
+    title: '净现值（Net Present Value）',
+    dataIndex: 'npv',
+    key: 'npv',
   },
   {
-    title: '进度绩效指数（已经完成的工作的价值/计划完成的工作价值）',
-    key: 'spi',
-    dataIndex: 'spi',
+    title: '内部收益率（Internal Rate of Return）',
+    key: 'irr',
+    dataIndex: 'irr',
   },
   {
-    title: '关键路径时间',
-    key: 'cpm',
-    dataIndex: 'cpm',
+    title: '投资回收期（Payback Period）',
+    key: 'pp',
+    dataIndex: 'pp',
+  },
+  {
+    title: '利润边际（Profit Margin）',
+    key: 'pm',
+    dataIndex: 'pm',
+  },
+  {
+    title: '毛利率（Gross Margin)',
+    key: 'gm',
+    dataIndex: 'gm',
+  },
+  {
+    title: '经济附加值（Economic Value Added）',
+    key: 'eva',
+    dataIndex: 'eva',
   },
 ];
 
@@ -167,50 +182,46 @@ const data = [
   {
     key: '1',
     name: '项目1',
-    schedule_time: '2024-08-01~2024-10-01',
-    actual_time:'2024-08-01~2024-10-10',
-    spi: '2',
-    cpm:'立项（10天）->编码（30天）->测试（10天） 50天'
+    roi: '50%',
+    npv:'50万',
+    irr: '10%',
+    pp:'5年',
+    pm: '20%',
+    gm: '10%',
+    eva: '20万',
   },
   {
     key: '1',
     name: '项目2',
-    schedule_time: '2024-08-01~2024-10-01',
-    actual_time:'2024-08-01~2024-10-10',
-    spi: '1.2',
-    cpm:'立项（3天）->编码（20天）->测试（10天） 33天'
+    roi: '50%',
+    npv:'50万',
+    irr: '10%',
+    pp:'5年',
+    pm: '20%',
+    gm: '10%',
+    eva: '20万',
   },
   {
     key: '1',
     name: '项目3',
-    schedule_time: '2024-08-01~2024-10-01',
-    actual_time:'2024-08-01~2024-10-10',
-    spi: '0.8',
-    cpm:'立项（3天）->编码（20天）->测试（10天） 33天'
+    roi: '50%',
+    npv:'50万',
+    irr: '10%',
+    pp:'5年',
+    pm: '20%',
+    gm: '10%',
+    eva: '20万',
   },
   {
     key: '1',
-    name: '项目1',
-    schedule_time: '2024-08-01~2024-10-01',
-    actual_time:'2024-08-01~2024-10-10',
-    spi: '1.1',
-    cpm:'立项（10天）->编码（30天）->测试（10天） 50天'
-  },
-  {
-    key: '1',
-    name: '项目2',
-    schedule_time: '2024-08-01~2024-10-01',
-    actual_time:'2024-08-01~2024-10-10',
-    spi: '1.2',
-    cpm:'立项（3天）->编码（20天）->测试（10天） 33天'
-  },
-  {
-    key: '1',
-    name: '项目3',
-    schedule_time: '2024-08-01~2024-10-01',
-    actual_time:'2024-08-01~2024-10-10',
-    spi: '2',
-    cpm:'立项（3天）->编码（20天）->测试（10天） 33天'
+    name: '项目4',
+    roi: '50%',
+    npv:'50万',
+    irr: '10%',
+    pp:'5年',
+    pm: '20%',
+    gm: '10%',
+    eva: '20万',
   },
 ];
 // Table end
