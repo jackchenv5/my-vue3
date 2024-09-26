@@ -479,6 +479,48 @@ const data = [
     ac_time:130,
     is_base:'否'
   },
+  {
+    key: '2',
+    id:3,
+    name: '项目3',
+    create_year:'2020年',
+    publish_year:'2021年',
+    flag_time:'2020-11-20',
+    schedule_tr5_time: '2021-11-20',
+    ac_tr5_time: '2020-12-20',
+    delay_time: 30,
+    tr5_rate: '90%',
+    ac_time:130,
+    is_base:'否'
+  },
+  {
+    key: '3',
+    id:4,
+    name: '项目4',
+    create_year:'2020年',
+    publish_year:'2021年',
+    flag_time:'2020-11-20',
+    schedule_tr5_time: '2021-11-20',
+    ac_tr5_time: '2020-12-20',
+    delay_time: 30,
+    tr5_rate: '90%',
+    ac_time:130,
+    is_base:'否'
+  },
+  {
+    key: '4',
+    id:5,
+    name: '项目5',
+    create_year:'2020年',
+    publish_year:'2021年',
+    flag_time:'2020-11-20',
+    schedule_tr5_time: '2021-11-20',
+    ac_tr5_time: '2020-12-20',
+    delay_time: 30,
+    tr5_rate: '90%',
+    ac_time:130,
+    is_base:'否'
+  },
 ];
 // Table end
 // form start
