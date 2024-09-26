@@ -15,6 +15,11 @@ const router = createRouter({
       component: () => import('../views/Time.vue')
     },
     {
+      path: '/time1',
+      name: 'time1',
+      component: () => import('../views/Time1.vue')
+    },
+    {
       path: '/budget',
       name: 'budget',
       component: () => import('../views/Budget.vue')

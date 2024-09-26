@@ -123,6 +123,13 @@ const items = ref<MenuProps['items']>([
     title: '软件周期',
   },
   {
+    key: 'time1',
+    icon: () => h(FieldTimeOutlined),
+    // label: '时间',
+    label: h('a', { href: '/time1', target: '_blank' }, '软件周期1'),
+    title: '软件周期1',
+  },
+  {
     key: '硬件周期',
     icon: () => h(DollarCircleOutlined),
     // label: '预算',

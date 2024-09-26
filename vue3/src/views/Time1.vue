@@ -91,7 +91,12 @@
         </span>
       </template>
       <!-- <div ref="chartRef" style="height: 80vh;width: 100%;"></div> -->
-      <div ref="ganttContainer" :style="{ width: '100vw', height: '80vh' }"></div>
+       <div>
+        <GanttChart :data="ganttData1" style="height: 40vh;" eleID="chart1"></GanttChart>
+       </div>
+        <div>
+          <GanttChart :data="ganttData2" style="height: 40vh;" eleID="chart2"></GanttChart>
+        </div>
     </a-tab-pane>
   </a-tabs>
 
@@ -100,6 +105,7 @@
   
 </template>
 <script lang="ts" setup>
+import GanttChart from './gantt/GanttChart.vue';
 import { h, ref,watch,onMounted,nextTick } from 'vue';
 import { CloseCircleOutlined,CheckCircleOutlined,PieChartOutlined,TableOutlined,HomeOutlined,DollarCircleOutlined,FieldTimeOutlined,ProjectOutlined,SettingOutlined,BookOutlined,PropertySafetyFilled,TeamOutlined,WhatsAppOutlined, ScheduleOutlined } from '@ant-design/icons-vue';
 import { MenuProps } from 'ant-design-vue';
@@ -107,7 +113,7 @@ import { MenuProps } from 'ant-design-vue';
 import type { MenuTheme } from 'ant-design-vue';
 const theme = ref<MenuTheme>('dark');
 
-const current = ref<string[]>(['time']);
+const current = ref<string[]>(['time1']);
 const items = ref<MenuProps['items']>([
   {
     key: 'home',
@@ -258,43 +264,7 @@ const data = [
   },
 ];
 // Table end
-
-
-//gant start
-import { gantt } from 'dhtmlx-gantt';
-
-
-// 引入 dhtmlxGantt 的样式
-import 'dhtmlx-gantt/codebase/dhtmlxgantt.css';
-
-const ganttContainer = ref();
-
-onMounted(() => {
-  // 初始化 gantt 图
-
-  // 配置 gantt 图
-  gantt.init(ganttContainer.value);
-  gantt.config.scale_unit = "week";
-  gantt.i18n.setLocale("cn");
-  gantt.config.grid_resize = true;
-  gantt.config.grid_width = 400;
-  gantt.config.columns[0].label = '阶段名';
-  gantt.config.columns[0].width = 200;
-  gantt.config.columns[1].width = 150;
-  gantt.config.columns[2].width = 50;
-  gantt.config.columns[3] = {};
-//   gantt.config.columns = [
-//     {name: "text", label: "阶段名", width: 300},
-//     {name: "start_date", label: "开始时间", width: 200},
-//     {name: "duration", label: "持续时间", width: 70},
-//     {name: "add", width: 44} // 保留此列
-// ];
-
-  // 禁用添加按钮和编辑功能
-  gantt.config.show_add_task_button = false;
-
-  gantt.config.readonly = true; // 禁用所有编辑功能
-  gantt.parse({
+const ganttData1 = ref({
 			data: [
 				{ id: 1, text: "项目1", start_date: "01-04-2023", duration: 80, progress: 0.4, open: true },
 				{ id: 2, text: "需求", start_date: "01-04-2023", duration: 5, progress: 0.6, parent: 1 },
@@ -305,14 +275,6 @@ onMounted(() => {
 				{ id: 7, text: "系统测试", start_date: "20-05-2023", duration: 10, progress: 0.6, parent: 1 },
 				{ id: 8, text: "场景测试", start_date: "25-05-2023", duration: 10, progress: 0.6, parent: 1 },
 
-        { id: 9, text: "项目2", start_date: "01-04-2023", duration: 80, progress: 0.4, open: true },
-				{ id: 10, text: "需求", start_date: "01-04-2023", duration: 5, progress: 0.6, parent: 9 },
-				{ id: 11, text: "总体方案及计划", start_date: "06-04-2023", duration: 15, progress: 0.6, parent: 9 },
-				{ id: 12, text: "设计及编码", start_date: "21-04-2023", duration: 20, progress: 0.6, parent: 9 },
-				{ id: 13, text: "集成调试", start_date: "12-05-2023", duration: 10, progress: 0.6, parent: 9 },
-				{ id: 14, text: "集成测试", start_date: "15-05-2023", duration: 10, progress: 0.6, parent: 9 },
-				{ id: 15, text: "系统测试", start_date: "20-05-2023", duration: 10, progress: 0.6, parent: 9 },
-				{ id: 16, text: "场景测试", start_date: "25-05-2023", duration: 10, progress: 0.6, parent: 9 },
 			],
 			links: [
 				// {id: 1, source: 1, target: 2, type: "1"},
@@ -324,6 +286,22 @@ onMounted(() => {
 				{id: 7, source: 6, target: 7, type: "1"},
 				{id: 8, source: 7, target: 8, type: "1"},
 
+			]
+		})
+
+  const ganttData2 = ref({
+			data: [
+
+        { id: 9, text: "项目2", start_date: "01-04-2023", duration: 80, progress: 0.4, open: true },
+				{ id: 10, text: "需求", start_date: "01-04-2023", duration: 5, progress: 0.6, parent: 9 },
+				{ id: 11, text: "总体方案及计划", start_date: "06-04-2023", duration: 15, progress: 0.6, parent: 9 },
+				{ id: 12, text: "设计及编码", start_date: "21-04-2023", duration: 20, progress: 0.6, parent: 9 },
+				{ id: 13, text: "集成调试", start_date: "12-05-2023", duration: 10, progress: 0.6, parent: 9 },
+				{ id: 14, text: "集成测试", start_date: "15-05-2023", duration: 10, progress: 0.6, parent: 9 },
+				{ id: 15, text: "系统测试", start_date: "20-05-2023", duration: 10, progress: 0.6, parent: 9 },
+				{ id: 16, text: "场景测试", start_date: "25-05-2023", duration: 10, progress: 0.6, parent: 9 },
+			],
+			links: [
 				{id: 10, source: 9, target: 10, type: "1"},
 				{id: 11, source: 10, target: 11, type: "1"},
 				{id: 12, source: 11, target: 12, type: "1"},
@@ -332,11 +310,11 @@ onMounted(() => {
 				{id: 15, source: 14, target: 15, type: "1"},
         {id: 16, source: 15, target: 16, type: "1"},
 			]
-		});
+		})
 
-  // 渲染 gantt 图
+onMounted(() => {
+  // 初始化 gantt 图
 
-  gantt.render();
 });
 //gant end
 </script>
