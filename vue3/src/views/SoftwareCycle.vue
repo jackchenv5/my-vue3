@@ -1,7 +1,7 @@
 <template>
   <Header></Header>
   <div style="height: 90px;position: fixed;right: 0;display: flex; flex-direction: column;justify-content: space-around;align-items: flex-end;z-index: 10000;">
-    <a href="/software-cycle" class="btn-link" >软件周期</a>
+    <a href="/software-cycle" class="btn-link active" >软件周期</a>
     <a href="/hardware-cycle" class="btn-link" >硬件周期</a>
   </div>
   <div style="">
@@ -545,7 +545,7 @@ const wrapperCol = { span: 20 };
 
 /* 当前选中的样式 */
 .btn-link.active {
-  background-color: #94afcc; /* 改变背景颜色 */
+  background-color: rgb(116, 116, 86); /* 改变背景颜色 */
   font-weight: bold; /* 加粗文字 */
 }
 </style>

@@ -1,5 +1,9 @@
 <template>
 <Header></Header>
+<div style="height: 90px;position: fixed;right: 0;display: flex; flex-direction: column;justify-content: space-around;align-items: flex-end;z-index: 10000;">
+    <a href="/software-cycle" class="btn-link" >软件周期</a>
+    <a href="/hardware-cycle" class="btn-link active" >硬件周期</a>
+  </div>
 <div style="">
     <div style="display: flex;flex-direction: column;width: 100%;height: 94vh;">
         <div style="margin-top: 10px;">
@@ -282,15 +286,31 @@ onMounted(() => {
 //gant end
 </script>
 
-
 <style scoped>
-.custom-iframe {
-	border: none; /* 移除边框 */
-	padding: 0; /* 移除内边距 */
-	margin: 0; /* 移除外边距 */
-	background-color: transparent; /* 透明背景 */
-	width: 100%; /* 可以根据需要调整宽度 */
-	height: 600px; /* 可以根据需要调整高度 */
-	display: block; /* 确保 iframe 行为像块级元素 */
+/* 去掉 a 标签的默认样式 */
+.btn-link {
+  text-decoration: none; /* 去掉下划线 */
+  color: white; /* 文字颜色 */
+  background-color: #23527c; /* 背景颜色 */
+  padding: 10px 20px; /* 内边距 */
+  border: none; /* 去掉边框 */
+  border-top-left-radius: 5px; /* 左上角圆角 */
+  border-bottom-left-radius: 5px; /* 左下角圆角 */
+  border-left: 5px;
+  display: inline-block; /* 使 a 标签像块级元素一样显示 */
+  cursor: pointer; /* 鼠标指针变为手形 */
+  font-size: 16px; /* 字体大小 */
+  transition: background-color 0.3s ease; /* 平滑过渡效果 */
+}
+
+/* 鼠标悬停时的样式 */
+.btn-link:hover {
+  background-color: #cae7c6; /* 改变背景颜色 */
+}
+
+/* 当前选中的样式 */
+.btn-link.active {
+  background-color: rgb(116, 116, 86); /* 改变背景颜色 */
+  font-weight: bold; /* 加粗文字 */
 }
 </style>
