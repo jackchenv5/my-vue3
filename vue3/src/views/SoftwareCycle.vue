@@ -1,6 +1,10 @@
 <template>
+  <Header></Header>
+  <div style="height: 90px;position: fixed;right: 0;display: flex; flex-direction: column;justify-content: space-around;align-items: flex-end;z-index: 10000;">
+    <a href="/software-cycle" class="btn-link" >软件周期</a>
+    <a href="/hardware-cycle" class="btn-link" >硬件周期</a>
+  </div>
   <div style="">
-    <a-menu background="red" v-model:selectedKeys="current" mode="horizontal" :items="items" :theme="theme"  style="height: 5vh;"/>
     <div style="display: flex;flex-direction: column;width: 100%;height: 94vh;">
         <div style="margin-top: 10px;">
           <a-form :model="formState"  layout="inline">
@@ -101,42 +105,8 @@
 </template>
 <script lang="ts" setup>
 import { h, ref,watch,onMounted,nextTick } from 'vue';
-import { CloseCircleOutlined,CheckCircleOutlined,PieChartOutlined,TableOutlined,HomeOutlined,DollarCircleOutlined,FieldTimeOutlined,ProjectOutlined,SettingOutlined,BookOutlined,PropertySafetyFilled,TeamOutlined,WhatsAppOutlined, ScheduleOutlined } from '@ant-design/icons-vue';
-import { MenuProps } from 'ant-design-vue';
+import Header from '@/components/layout/Header.vue'
 
-import type { MenuTheme } from 'ant-design-vue';
-const theme = ref<MenuTheme>('dark');
-
-const current = ref<string[]>(['home']);
-const items = ref<MenuProps['items']>([
-  {
-    key: 'home',
-    icon: () => h(HomeOutlined),
-    label: h('a', { href: '/', target: '_blank' }, '周期及计划达成率'),
-    title: '周期及计划达成率',
-  },
-  {
-    key: 'time',
-    icon: () => h(FieldTimeOutlined),
-    // label: '时间',
-    label: h('a', { href: '/time', target: '_blank' }, '软件周期'),
-    title: '软件周期',
-  },
-  {
-    key: 'time1',
-    icon: () => h(FieldTimeOutlined),
-    // label: '时间',
-    label: h('a', { href: '/time1', target: '_blank' }, '软件周期1'),
-    title: '软件周期1',
-  },
-  {
-    key: '硬件周期',
-    icon: () => h(DollarCircleOutlined),
-    // label: '预算',
-    label: h('a', { href: '/budget', target: '_blank' }, '硬件周期'),
-    title: '硬件周期',
-  },
-]);
 
 import * as echarts from 'echarts';
 
@@ -368,7 +338,6 @@ onMounted(() => {
     chartInstance.setOption(option);
   })
 
-
 })
 const activeKey = ref('1');
 //tabs end
@@ -553,4 +522,30 @@ const wrapperCol = { span: 20 };
 
 
 <style scoped>
+/* 去掉 a 标签的默认样式 */
+.btn-link {
+  text-decoration: none; /* 去掉下划线 */
+  color: white; /* 文字颜色 */
+  background-color: #23527c; /* 背景颜色 */
+  padding: 10px 20px; /* 内边距 */
+  border: none; /* 去掉边框 */
+  border-top-left-radius: 5px; /* 左上角圆角 */
+  border-bottom-left-radius: 5px; /* 左下角圆角 */
+  border-left: 5px;
+  display: inline-block; /* 使 a 标签像块级元素一样显示 */
+  cursor: pointer; /* 鼠标指针变为手形 */
+  font-size: 16px; /* 字体大小 */
+  transition: background-color 0.3s ease; /* 平滑过渡效果 */
+}
+
+/* 鼠标悬停时的样式 */
+.btn-link:hover {
+  background-color: #cae7c6; /* 改变背景颜色 */
+}
+
+/* 当前选中的样式 */
+.btn-link.active {
+  background-color: #94afcc; /* 改变背景颜色 */
+  font-weight: bold; /* 加粗文字 */
+}
 </style>

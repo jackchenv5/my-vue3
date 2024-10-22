@@ -1,13 +1,27 @@
 <template>
-  <div style="">
-       <RouterView/>
-  </div>
-  
+  <nav class="nav-title">
+    <div class="navbar-header">
+      <a class="navbar-brand" herf="/">
+      <span style="font-family: Consolas;font-size: 24px;font-weight: bold;letter-spacing: 4px;color: #ffffff;">看板系统</span>
+    </a>
+    </div>
+    <div>
+      <ul class="nav navbar-nav">
+        <li> <a class="nav-item" href="/myself">我的面板</a></li>
+        <li> <a class="nav-item" href="/myself">数据指标</a></li>
+        <li> <a class="nav-item" href="/myself">质量看板</a></li>
+        <li> <a class="nav-item" href="/myself">预算和投入</a></li>
+        <li> <a class="nav-item" href="/myself">项目跟踪</a></li>
+        <li class="active"> <a class="nav-item " href="/software-cycle">项目度量</a></li>
+        <li> <a class="nav-item" href="/myself">任务管理</a></li>
+        <li> <a class="nav-item" href="/myself">报表大屏</a></li>
+        <li> <a class="nav-item" href="/myself">管理</a></li>
+      </ul>
+    </div>
+  </nav>
 </template>
 <script lang="ts" setup>
-import {RouterView } from 'vue-router'
 </script>
-
 
 <style scoped>
 .nav-title {

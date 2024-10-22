@@ -1,9 +1,9 @@
 <template>
-  <div ref="ganttContainer"  class="gantt-container" :id="eleID"></div>
+  <div ref="ganttContainer"  class="gantt-container" style="height: 100vh;width: 100%;margin: 0;" ></div>
 </template>
 
 <script setup>
-import { ref, onMounted, watch } from 'vue';
+import { ref, onMounted } from 'vue';
 import { gantt } from 'dhtmlx-gantt';
 
 // 引入 dhtmlxGantt 的样式
@@ -17,10 +17,6 @@ const props = defineProps({
     type: Array,
     required: true
   },
-  eleID: {
-    type: String,
-    required: true
-  },
   config: {
     type: Object,
     default: () => ({})
@@ -32,7 +28,7 @@ const initializeGantt = () => {
     ganttInstance.clearAll();
   } else {
     ganttInstance = gantt;
-    ganttInstance.init(document.getElementById(props.eleID));
+    ganttInstance.init(ganttContainer.value);
   }
 
   // 应用配置
